@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ESP32 Air Monitor</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- iOS / PWA icons (ensure paths are correct) -->
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+    <meta name="theme-color" content="#0b1220">
+
+    <!-- Apple iPhone Support -->
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="apple-mobile-web-app-title" content="Air Monitor">
+
+    <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+    <link rel="icon" href="icon-512.png" sizes="512x512" type="image/png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="topbar">
+            <div class="brand">
+                <div class="logo">◈</div>
+                <div>
+                    <div class="title">Air Monitor</div>
+                    <div class="subtitle">ESP32 • Live Telemetry</div>
+                </div>
+            </div>
+
+            <div class="status">
+                <div class="pill" id="deviceStatusPill">ONLINE</div>
+                <div class="last-seen">
+                    <span class="label">Last update</span>
+                    <span class="value" id="lastSeenText">--</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard">
+
+            <section class="kpi-grid">
+                <div class="card kpi">
+                    <div class="kpi-head">Temperature</div>
+                    <div class="kpi-value" id="temp">0 <span class="kpi-unit">°C</span></div>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">Humidity</div>
+                    <div class="kpi-value" id="humidity">0 <span class="kpi-unit">%</span></div>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">Gas Level</div>
+                    <div class="kpi-value" id="gas">0</div>
+                </div>
+
+                <div class="card kpi">
+                    <div class="kpi-head">Soil Moisture</div>
+                    <div class="kpi-value" id="soil">0</div>
+                </div>
+
+                <div class="card kpi small">
+                    <div class="kpi-head">Fan Status</div>
+                    <div class="kpi-value" id="fanState">OFF</div>
+                </div>
+
+                <div class="card kpi small">
+                    <div class="kpi-head">Current Mode</div>
+                    <div class="kpi-value" id="modeText">AUTO</div>
+                </div>
+            </section>
+
+            <section class="controls">
+                <div class="card">
+                    <div class="card-title">Mode Control</div>
+                    <div class="button-row">
+                        <button class="btn" onclick="setAuto()">AUTO</button>
+                        <button class="btn" onclick="setManual()">MANUAL</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Fan Control</div>
+                    <div class="button-row">
+                        <button class="btn primary" onclick="fanON()">ON</button>
+                        <button class="btn" onclick="fanOFF()">OFF</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chart-grid">
+                <div class="card chart-card">
+                    <div class="card-title">Temperature</div>
+                    <canvas id="tempChart"></canvas>
+                </div>
+
+                <div class="card chart-card">
+                    <div class="card-title">Gas</div>
+                    <canvas id="gasChart"></canvas>
+                </div>
+
+                <div class="card chart-card">
+                    <div class="card-title">Humidity</div>
+                    <canvas id="humidityChart"></canvas>
+                </div>
+
+                <div class="card chart-card">
+                    <div class="card-title">Soil Moisture</div>
+                    <canvas id="soilChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>
+
